@@ -1,0 +1,47 @@
+<br><br>
+
+
+<table class="table table-bordered"  style="margin: auto; width: 500px">
+  <select style="margin: 5px"  [(ngModel)]="filterStatus">
+    <option value="XEM_TAT_CA">Xem tất cả</option>
+    <option value="XEM_DA_DOC">Xem sách đã đọc </option>
+    <option value="XEM_CHUA_DOC">Xem sách chưa đọc</option>
+  </select>
+  <tr>
+    <th class="bg-primary" col-span="2" style="font-size: 20px;"> <p style="color:white">Danh sách sách</p></th>
+  </tr>
+  <div *ngFor="let word of arrWords">
+    <div class="word" *ngIf="getShowStatus(word.memorized)">
+      <tr >
+        <td  style="width: 166px" [ngStyle]="{ color: word.memorized ? '#7278ff' : 'red' }">
+          {{ word.vn }}
+        </td>
+        <td style="width: 166px" >
+          <button (click)="word.memorized = !word.memorized">
+            {{ word.memorized ? 'chưa đọc' : 'đã đọc' }}
+          </button>
+        </td>
+        <td style="width: 167px">
+          <button (click)="removeWord(word.id);">xoá</button>
+        </td>
+
+    </div>
+
+  </div>
+  <div *ngIf="isShowForm" >
+    <input style="margin-top: 5px; margin-left: 5px; margin-bottom: 5px" placeholder="Sách" [(ngModel)]="newBook"/>
+    <input placeholder="Mô tả" [(ngModel)]="newDesc"/>
+    <br/>
+    <button (click)="addWord();">Thêm sách </button>
+  </div>
+  <button style="margin:5px" (click)="isShowForm = true" *ngIf="!isShowForm">
+    Thêm sách
+  </button>
+</table>
+
+
+
+
+
+
+
